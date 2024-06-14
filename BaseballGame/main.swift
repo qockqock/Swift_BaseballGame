@@ -12,18 +12,26 @@
 import Foundation
 
     // 임의의 숫자 생성 (게임 시작)
-    let target = baseballgame()
-    target.start()
+    let target = Baseballstart()
+    let SNum = target.start()
+    print("야구게임 시작! 세 개의 랜덤 숫자가 생성되었습니다.")
 
+    // 게임 실행
+    let game = Explain()
+
+    // 플레이어 정답 입력
+    let userinput = input()
+    let PNum = userinput.Userinput()
+    
+    let result = game.Calculation(secret: SNum, player: PNum)
+    print("")
     // 앞 자리 0 나오는지 테스트
     //for _ in 0...100{
     //    target.start()
     //}
-    print("야구게임 시작! 세 개의 랜덤 숫자가 생성되었습니다.")
+    
 
-    // 플레이어 정답 입력
-    let userinput = input()
-    userinput.Userinput()
+    
 
 
 
