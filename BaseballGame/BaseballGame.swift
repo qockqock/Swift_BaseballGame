@@ -17,14 +17,23 @@ class baseballgame{
      */
     
     // 0빼기 3항 연산자 고려해볼 것
-    func start() -> [Int] {
-        var number: Set<Int> = []
-        while number.count < 3 {
-            number.insert(Int.random(in: 0..<10))
-        }
-        print(number)
-        return Array(number)
-    }
     
-}
+    
+    func start() -> [Int] {
+            var number: [Int] = []
+            
+            // 규칙 : 첫 자리는 0이 아닌수를 뽑아내야 함.
+            number.append(Int.random(in: 1..<10))
+            
+            // 두 번째 자리와 세 번째 자리는 0에서 9까지 무작위 난수
+            while number.count < 3 {
+                let nextNum = Int.random(in: 0..<10)
+                    if !number.contains(nextNum){
+                        number.append(nextNum)
+                    }
+            }
+            print(number)
+            return number
+        }
+    }
 
