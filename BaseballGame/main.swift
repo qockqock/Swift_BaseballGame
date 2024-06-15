@@ -25,34 +25,44 @@ import Foundation
     var gameover = false
     
     repeat{
-    if let PNum = userinput.userInput() {
-        print("플레이어 값 입력 : \(PNum)")
-        
-        // 게임 실행
-        let game = Explain()
-        
-        if PNum.count == 3{
-            let result = game.Calculation(secret: SNum, player: PNum)
-            print("\(result.strikes) 스트라이크 ,\(result.balls) 볼")
+        if let PNum = userinput.userInput() {
+            print("플레이어 값 입력 : \(PNum)")
             
-            if result.strikes == 3 {
-                print("정답입니다!")
-                gameover = true
-            }else{
-            // PNum.count == 3 을 통과했을 때 마다 라이프 1개씩 차감.
-            if life != 0{
-            print("기회가 한 번 소진되었습니다.")
-            }else{
-            print("기회 모두 소진")
-            gameover = true
-          }
-            life -= 1
+            // 게임 실행
+            let game = Explain()
+            
+            if PNum.count == 3{
+                let result = game.Calculation(secret: SNum, player: PNum)
+                
+                // 첫 번째 자릿수 0 예외처리
+                if PNum[0] == 0{
+                    print("첫째 자릿수에는 '0'이 입력될 수 없습니다.")
+                    continue
+                }
+                
+                // 스트라이크, 볼 출력
+                if result.strikes == 3 {
+                    print("정답입니다!")
+                    gameover = true
+                }else if result.strikes != 0 || result.balls != 0 {
+                    print("\(result.strikes) 스트라이크 ,\(result.balls) 볼")
+                }else{
+                    print("Nothing")
+                }
+                
+                // PNum.count == 3 을 통과했을 때 마다 라이프 1개씩 차감.
+                if life != 0{
+                    print("기회가 한 번 소진되었습니다.")
+                }else{
+                    print("기회 모두 소진")
+                    gameover = true
+                }
+                life -= 1
+                
+            }
+        }else{
+        print("잘못된 입력 값 입니다. 세 개의 숫자를 입력해주세요")
         }
-    }
-}   else {
-    print("잘못된 입력 값 입니다. 세 개의 숫자를 입력해주세요")
-}
-        
     }while !gameover
     
     // chapter 1
