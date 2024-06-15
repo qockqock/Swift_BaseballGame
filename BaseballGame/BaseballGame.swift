@@ -35,7 +35,26 @@ class Baseballstart{
         }
     }
 // enumerated가 뭐임?
-//
+
+class Explain{
+    func Calculation(secret: [Int], player: [Int]) -> (strikes: Int, balls: Int){
+        var strikes = 0
+        var balls = 0
+        
+        for(key, value) in player.enumerated() {
+            if secret.contains(value){
+                if secret[key] == value{
+                    strikes += 1
+                }else{
+                    balls += 1
+                }
+            }
+        }
+        return (strikes,balls)
+    }
+}
+
+/*
 class Explain{
     func Calculation(secret: [Int], player: [Int]) -> (strikes: Int, balls: Int){
         var strikes = 0
@@ -51,7 +70,13 @@ class Explain{
             }
         }
         
+        if strikes == 3 {
+            print("정답입니다!")
+        } else{
+            print("실패..!")
+        }
+        
         return (strikes,balls)
     }
 }
-
+*/
