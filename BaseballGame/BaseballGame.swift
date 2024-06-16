@@ -5,6 +5,11 @@ import Foundation
  1. arc4random_uniform
  2. Int.random(in:)
  이 중 가독성을 고려해봤을 때 2번이 더 적합하다고 생각하여 2번을 선택했다.
+ ++++
+ 조원들의 코드를 같이 보며 Array shuffle의 기능을 발견했다.
+ 1부터 9까지의 난수들을 셔플하여 난수를 뽑아내었고,
+ 이를 삼항연산자로 풀어내 깔끔하게 코드를 풀어냈다. (가독성도 괜찮)
+ 이후 스터디에서 내가 짠 코드랑 효율면에서 뭐가 더 좋을지 비교해봐야겠다.
  */
 
 /*
@@ -13,7 +18,6 @@ import Foundation
  3. O(1)의 시간복잡도를 가진다.
  */
 
-// 0빼기 3항 연산자 고려해볼 것
 // 전에 배웠던 추상화 개념으로 프로토콜로 구현한 다음 구현하면 될 것 같은디
 class Baseballstart{
     
@@ -62,7 +66,7 @@ class PlayBall {
         
         let userinput = Input()
         
-        var life = 9
+        var life = 8
         var gameover = false
         
         repeat {
@@ -97,9 +101,9 @@ class PlayBall {
                         print("Nothing")
                     }
                     
-                    // PNum.count == 3 을 통과했을 때마다 라이프 1개씩 차감.
-                    if life != 1 {
-                        print("기회가 한 번 소진되었습니다.")
+                    // PNum.count == 3 을 통과했을 때마다 라이프 1씩 차감.
+                    if life != 0 {
+                        print("기회가 \(life)회 남았습니다.")
                     } else {
                         print("기회 모두 소진")
                         gameover = true

@@ -10,6 +10,3 @@ class Input{
         return inputNumber.count == 3 ? inputNumber : nil
     }
 }
-
-    // 123
-    // 1 2 3
