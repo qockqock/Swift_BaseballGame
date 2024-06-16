@@ -59,7 +59,9 @@ class Explain{
 }
 
 class PlayBall {
-    func startGame() {
+    var attempts = 0 // 시도 횟수를 저장하는 변수
+
+    func startGame() -> Int { // 시도 횟수를 반환하도록 함수 타입 수정
         let target = Baseballstart()
         let SNum = target.start()
         print("야구게임 시작! 세 개의 랜덤 숫자가 생성되었습니다.")
@@ -110,13 +112,15 @@ class PlayBall {
                     }
                     life -= 1
                 }
-            } 
-            else {
+            } else {
                 print("잘못된 입력 값 입니다. 세 개의 숫자를 입력해주세요")
             }
+            attempts += 1 // 시도 횟수 증가
         } while !gameover
+        return attempts // 시도 횟수 반환
     }
 }
+
 
 // chapter 1
 // 플레이어 정답 입력을 받았을 때 옵셔널로 받았기 때문에, 옵셔널 바인딩으로 값을 추출해줘야함.
