@@ -1,22 +1,66 @@
 /*
  야구게임 규칙
- 사용되는 숫자는 0에서 9까지 서로 다른 숫자이다.
- 첫 번째 숫자가 0이면 안 됨.
- 기회는 9번
- 숫자는 맞지만 위치가 틀렸을 때는 볼.
- 숫자와 위치가 전부 맞으면 스트라이크.
- 숫자와 위치가 전부 틀리면 아웃. "틀렸다"는 게 중요하다. 의외로 아웃이 제일 좋은 수인데, 틀린 숫자만 제끼고 남은 숫자끼리 조합하면 되므로 경우의 수가 팍팍 줄어들기 때문. 볼, 스트라이크는 숫자는 맞는 게 있으나 무슨 숫자가 맞았는지를 알 수가 없어 경우의 수를 더 생각해봐야 하지만 아웃은 틀린 숫자만 제거한 나머지만 생각해보면 어렵지 않기 때문. 2아웃이 나오면 더욱 좋다. 작정하고 숫자 예측을 이상하게 하지 않는 이상 3아웃 이상은 절대로 나오지 않는다.
- 물론 무엇이 볼이고 스트라이크인지는 알려주지 않는다.
- 두 숫자가 중복되면 경우의 수가 많아져서 그런지 중복 숫자는 잘 사용하지 않는다.
+ 1에서 9까지의 서로 다른 임의의 수 3개를 정하고 맞추는 게임이다.
+ 정답을 맞추기 위해 3자리수를 입력하고 힌트를 받는다. (숫자는 맞지만 위치가 틀렸을 때는 볼숫자와 위치가 전부 맞으면 스트라이크)
+ 기회는 총 9번이며, 사용되는 숫자에 포함되지 않는 것은 카운팅 되지 않는다.
+ 사용되는 숫자는 0에서 9까지 서로 다른 숫자이고, 단 첫 번째 숫자가 0이면 안 된다.
+ - ex) 정답 : 456 인 경우
+     - 435를 입력한 경우 → 1스트라이크 1볼
+     - 357를 입력한 경우 → 1스트라이크
+     - 678를 입력한 경우 → 1볼
+     - 123를 입력한 경우 → Nothing
  */
 
 import Foundation
-//
-//let game = PlayBall()
-//game.startGame()
-//
 
 let GameStart = View()
 GameStart.Information()
 
-
+class View{
+    var gameAttempts: [Int] = [] // 시도 횟수를 저장하는 배열
+    func Information() {
+        var attainment = true
+        
+        while attainment {
+            print("""
+                환영합니다! 원하시는 번호를 입력해주세요
+                1.게임 시작하기 2.게임 기록 보기 3.종료하기
+            """)
+            
+            if let UserSelect = readLine() {
+                switch UserSelect {
+                case "1":
+                    start()
+                    continue
+                case "2":
+                    record() // 기록 보기 함수 호출
+                    continue
+                case "3":
+                    finish()
+                    attainment = false
+                default:
+                    print("메뉴에 있는 번호를 적어주세요")
+                }
+            }
+        }
+    }
+    
+    func start(){
+        Message().startMessage()
+        let attempts = PlayBall().startGame() // 시도 횟수를 받아옴
+        gameAttempts.append(attempts) // 시도 횟수를 배열에 추가
+    }
+    
+    func record() {
+        Message().recordMessage()
+        print("<게임 기록 보기>")
+        for i in 0..<gameAttempts.count {
+            print("\(i + 1)번째 게임 : 시도 횟수 - \(gameAttempts[i])회")
+        }
+    }
+    
+    func finish(){
+        Message().finishMessage()
+        print("종료합니다.")
+    }
+}
