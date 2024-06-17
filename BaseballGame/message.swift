@@ -1,10 +1,4 @@
-protocol MessageProtocol{
-    func startMessage()
-    func recordMessage()
-    func finishMessage()
-}
-
-class Message: MessageProtocol{
+class Message{
     func startMessage(){
         print("""
             ┌─┐┌─┐┌┬┐┌─┐  ┌─┐┌┬┐┌─┐┬─┐┌┬┐
